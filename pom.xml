@@ -12,6 +12,7 @@
     <modules>
         <module>Spider-common</module>
         <module>Spider-github</module>
+        <module>Spider-youku</module>
     </modules>
 
     <dependencies>
