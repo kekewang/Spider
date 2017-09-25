@@ -1,0 +1,8 @@
+CREATE TABLE `spider`.`youku_video_title` (
+  `id` INT GENERATED ALWAYS AS () VIRTUAL,
+  `title` VARCHAR(45) NULL,
+  `url` VARCHAR(45) NULL,
+  `img` VARCHAR(45) NULL,
+  `import_date` DATE NULL,
+  PRIMARY KEY (`id`))
+COMMENT = 'youku video db';
