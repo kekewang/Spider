@@ -1,10 +1,20 @@
 package com.spider.youku;
 
-import com.spider.utils.StringUtils;
+import com.sun.deploy.net.HttpUtils;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
+import us.codecraft.webmagic.downloader.Downloader;
+import us.codecraft.webmagic.downloader.HttpClientDownloader;
 import us.codecraft.webmagic.processor.PageProcessor;
+import us.codecraft.webmagic.proxy.Proxy;
+import us.codecraft.webmagic.proxy.ProxyProvider;
+import us.codecraft.webmagic.proxy.SimpleProxyProvider;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by wangke on 2017/9/22.
@@ -12,6 +22,11 @@ import us.codecraft.webmagic.processor.PageProcessor;
 public class YoukuProcesser implements PageProcessor {
 
     private Site site = Site.me().setRetryTimes(5).setSleepTime(1000).setTimeOut(10000);
+
+    public List<Proxy> proxyList = new ArrayList();
+
+    public BufferedReader proxyIpReader = new BufferedReader(new InputStreamReader(HttpUtils.class.getResourceAsStream("/config/proxyip.txt")));
+
 
     public static int pageCount = 0;
 
@@ -35,7 +50,31 @@ public class YoukuProcesser implements PageProcessor {
         return site;
     }
 
+    public ProxyProvider getSimpleProxyProvider(){
+        String[] ip = new String[4];
+        try {
+            while(proxyIpReader.readLine() != null) {
+                String socket=proxyIpReader.readLine();
+                String[] ipandport=socket.split(":");
+
+                if(ipandport.length==2){
+                    Proxy proxy = new Proxy(ipandport[0], Integer.parseInt(ipandport[1]));
+                    proxyList.add(proxy);
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        SimpleProxyProvider proxyProvider = new SimpleProxyProvider(proxyList);
+
+        return proxyProvider;
+    }
     public static void main(String[] args){
-        Spider.create(new YoukuProcesser()).addUrl("http://www.youku.com/").thread(20).run();
+        YoukuProcesser processer = new YoukuProcesser();
+        HttpClientDownloader downloader = new HttpClientDownloader();
+        downloader.setProxyProvider(processer.getSimpleProxyProvider());
+        Spider.create(processer).addUrl("http://www.youku.com/").setDownloader(downloader).thread(20).run();
     }
 }
