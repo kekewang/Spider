@@ -13,6 +13,7 @@
         <module>Spider-common</module>
         <module>Spider-github</module>
         <module>Spider-youku</module>
+        <module>Spider-proxy</module>
     </modules>
 
     <dependencies>
@@ -26,6 +27,18 @@
             <artifactId>webmagic-extension</artifactId>
             <version>0.7.3</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.letcheng</groupId>
+            <artifactId>ProxyPool</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
     
 </project>
