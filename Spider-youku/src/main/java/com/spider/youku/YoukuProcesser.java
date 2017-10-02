@@ -1,6 +1,5 @@
 package com.spider.youku;
 
-import com.sun.deploy.net.HttpUtils;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
@@ -25,7 +24,7 @@ public class YoukuProcesser implements PageProcessor {
 
     public List<Proxy> proxyList = new ArrayList();
 
-    public BufferedReader proxyIpReader = new BufferedReader(new InputStreamReader(HttpUtils.class.getResourceAsStream("/config/proxyip.txt")));
+    public BufferedReader proxyIpReader = new BufferedReader(new InputStreamReader(YoukuProcesser.class.getResourceAsStream("/config/proxyip.txt")));
 
 
     public static int pageCount = 0;
@@ -74,7 +73,7 @@ public class YoukuProcesser implements PageProcessor {
     public static void main(String[] args){
         YoukuProcesser processer = new YoukuProcesser();
         HttpClientDownloader downloader = new HttpClientDownloader();
-        downloader.setProxyProvider(processer.getSimpleProxyProvider());
+        //downloader.setProxyProvider(processer.getSimpleProxyProvider());
         Spider.create(processer).addUrl("http://www.youku.com/").setDownloader(downloader).thread(20).run();
     }
 }
