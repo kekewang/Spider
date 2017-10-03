@@ -76,22 +76,18 @@ public class XiciProcesser implements PageProcessor {
         String path = XiciProcesser.class.getResource(file).getPath();
         BufferedWriter proxyIpWriter = null;
         try {
-            FileOutputStream outputFile = new FileOutputStream(path);
-            proxyIpWriter = new BufferedWriter(
-                    new OutputStreamWriter(outputFile));
+            FileOutputStream outputFile = new FileOutputStream(path,true);
+            OutputStreamWriter writer = new OutputStreamWriter(outputFile);
+            proxyIpWriter = new BufferedWriter(writer);
             proxyIpWriter.write(proxy);
             proxyIpWriter.newLine();
+            proxyIpWriter.flush();
+            writer.close();
+            proxyIpWriter.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally{
-            /*try {
-                proxyIpWriter.flush();
-                proxyIpWriter.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }*/
         }
     }
 

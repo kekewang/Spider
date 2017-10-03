@@ -36,6 +36,7 @@ public class YoukuProcesser implements PageProcessor {
         page.putField("classUrl", page.getHtml().xpath("//h1[@class='title']/a/@href"));
         page.putField("vid",page.getUrl().regex("v.youku.com/v_show/id_([\\w+]*)==").toString());
 
+
         if (page.getResultItems().get("vid") == null){
             //skip this page
             page.setSkip(true);
