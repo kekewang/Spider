@@ -44,7 +44,6 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-aop:4.2.5.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: aopalliance:aopalliance:1.0" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-test:4.2.5.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: springframework:spring-web:4.2.5.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.mybatis:mybatis:3.2.8" level="project" />
     <orderEntry type="library" name="Maven: org.mybatis:mybatis-spring:1.2.2" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.29" level="project" />

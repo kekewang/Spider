@@ -11,7 +11,7 @@
         <param-name>log4jConfigLocation</param-name>
         <param-value>classpath:config/log4j.properties</param-value>
     </context-param>
-    
+
     <filter>
         <filter-name>encodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

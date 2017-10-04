@@ -8,6 +8,7 @@ import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.proxy.Proxy;
 import us.codecraft.webmagic.proxy.ProxyProvider;
 import us.codecraft.webmagic.proxy.SimpleProxyProvider;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -32,12 +33,12 @@ public class YoukuProcesser implements PageProcessor {
         page.addTargetRequests(page.getHtml().links().regex("//v.youku.com/v_show/id_\\w+.*").all());
         page.putField("url", page.getUrl().toString());
         page.putField("title", page.getHtml().xpath("//div[@class='base_info']/h1[@class='title']/allText()").toString());
-        page.putField("category",page.getHtml().xpath("//h1[@class='title']/a/text()").toString());
+        page.putField("category", page.getHtml().xpath("//h1[@class='title']/a/text()").toString());
         page.putField("categoryUrl", page.getHtml().xpath("//h1[@class='title']/a/@href"));
-        page.putField("vid",page.getUrl().regex("v.youku.com/v_show/id_([\\w+]*)==").toString());
+        page.putField("vid", page.getUrl().regex("v.youku.com/v_show/id_([\\w+]*)==").toString());
 
 
-        if (page.getResultItems().get("vid") == null){
+        if (page.getResultItems().get("vid") == null) {
             //skip this page
             page.setSkip(true);
         }
@@ -48,14 +49,14 @@ public class YoukuProcesser implements PageProcessor {
         return site;
     }
 
-    public ProxyProvider getSimpleProxyProvider(){
+    public ProxyProvider getSimpleProxyProvider() {
         String[] ip = new String[4];
         try {
-            while(proxyIpReader.readLine() != null) {
-                String socket=proxyIpReader.readLine();
-                String[] ipandport=socket.split(":");
+            String socket = null;
+            while ((socket = proxyIpReader.readLine()) != null) {
+                String[] ipandport = socket.split(":");
 
-                if(ipandport.length==2){
+                if (ipandport.length == 2) {
                     Proxy proxy = new Proxy(ipandport[0], Integer.parseInt(ipandport[1]));
                     proxyList.add(proxy);
                 }
@@ -69,7 +70,8 @@ public class YoukuProcesser implements PageProcessor {
 
         return proxyProvider;
     }
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         YoukuProcesser processer = new YoukuProcesser();
         HttpClientDownloader downloader = new HttpClientDownloader();
         downloader.setProxyProvider(processer.getSimpleProxyProvider());
