@@ -1,6 +1,5 @@
 package com.spider.proxy.processer;
 
-import com.spider.proxy.utils.FileUtils;
 import com.spider.proxy.utils.ProxyValidater;
 import com.spider.proxy.vo.ProxyVo;
 import us.codecraft.webmagic.Page;

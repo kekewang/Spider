@@ -32,8 +32,8 @@ public class YoukuProcesser implements PageProcessor {
         page.addTargetRequests(page.getHtml().links().regex("//v.youku.com/v_show/id_\\w+.*").all());
         page.putField("url", page.getUrl().toString());
         page.putField("title", page.getHtml().xpath("//div[@class='base_info']/h1[@class='title']/allText()").toString());
-        page.putField("class",page.getHtml().xpath("//h1[@class='title']/a/text()").toString());
-        page.putField("classUrl", page.getHtml().xpath("//h1[@class='title']/a/@href"));
+        page.putField("category",page.getHtml().xpath("//h1[@class='title']/a/text()").toString());
+        page.putField("categoryUrl", page.getHtml().xpath("//h1[@class='title']/a/@href"));
         page.putField("vid",page.getUrl().regex("v.youku.com/v_show/id_([\\w+]*)==").toString());
 
 
