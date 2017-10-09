@@ -22,19 +22,23 @@ public class XiciProcesser implements PageProcessor {
 
     private Site site = Site.me().setRetryTimes(5).setSleepTime(1000).setTimeOut(10000);
 
+    /**
+     * Main page
+     */
     private String xiciMainPage;
 
-    public List<ProxyVo> proxyList = new ArrayList();
-    
-    private static int pageNo = 1;
+    /**
+     * Page No.
+     */
+    private static int pageNo;
 
     public String getXiciMainPage() {
         return xiciMainPage;
-
     }
 
     public void setXiciMainPage(String xiciMainPage) {
         this.xiciMainPage = xiciMainPage;
+        pageNo = 1;
     }
 
     public void process(Page page) {
@@ -52,8 +56,8 @@ public class XiciProcesser implements PageProcessor {
                 proxyVo.setAliveTime(infos[5]);
                 proxyVo.setVerifyTime(infos[6] + " " + infos[7]);
 
-                if (ProxyType.HTTP.getType().equalsIgnoreCase(infos[4]) &&
-                ProxyValidater.checkByProxychecker(proxyVo.getIp(),proxyVo.getPort())) {
+                /*if (ProxyType.HTTP.getType().equalsIgnoreCase(infos[4]) &&
+                    ProxyValidater.checkByProxychecker(proxyVo.getIp(),proxyVo.getPort())) {
                     System.out.println("Successed to add new proxy," + proxyVo.getIp() + ":" + proxyVo.getPort());
                     proxyList.add(proxyVo);
 
@@ -61,6 +65,32 @@ public class XiciProcesser implements PageProcessor {
                 }
                 else {
                     System.out.println("Failed to add new proxy," + proxyVo.getIp() + ":" + proxyVo.getPort());
+                }*/
+
+                if (ProxyType.HTTP.getType().equalsIgnoreCase(infos[4])){
+                    ProxyThreadPool.post(new Runnable() {
+                        private String ip;
+
+                        private String port;
+
+                        @Override
+                        public void run() {
+                            boolean isValidProxy = ProxyValidater.checkByProxychecker(ip, port);
+                            if (isValidProxy){
+                                saveProxy("/proxy", ip + ":" + port);
+                                System.out.println("Successed to add new proxy," + ip + ":" + port);
+                            }
+                            else {
+                                System.out.println("Failed to add new proxy," + ","+ ip + ":" + port);
+                            }
+                        }
+
+                        public Runnable init(String ip, String port) {
+                            this.ip = ip;
+                            this.port = port;
+                            return this;
+                        }
+                    }.init(proxyVo.getIp(), proxyVo.getPort()));
                 }
             }
         }
@@ -76,7 +106,7 @@ public class XiciProcesser implements PageProcessor {
         return site;
     }
 
-    public void saveProxy(String file, String proxy){
+    public synchronized void saveProxy(String file, String proxy){
         String path = XiciProcesser.class.getResource(file).getPath();
         BufferedWriter proxyIpWriter = null;
         try {
