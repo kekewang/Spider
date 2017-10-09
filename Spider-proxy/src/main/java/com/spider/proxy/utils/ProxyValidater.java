@@ -1,5 +1,6 @@
 package com.spider.proxy.utils;
 
+import com.spider.common.utils.StringUtil;
 import org.apache.http.*;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -48,10 +49,31 @@ public class ProxyValidater {
         return false;
     }
 
+    /**
+     *
+     * @param ip
+     * @param port
+     * @return
+     */
+    public static boolean checkByProxychecker(String ip, String port) {
+        boolean isValid = false;
+        String proxyChecker = "http://web.chacuo.net/netproxycheck";
+        String params = String.format("data=%s&type=proxycheck&arg=p=%s_t=1_o=5", ip, port);
+        String content = HttpRequestUtil.sendPost(proxyChecker, params);
+
+        String str = StringUtil.chinaToUnicode("属于");
+        if(content != null && content.indexOf(str) != -1 )
+            isValid =  true;
+
+        return isValid;
+    }
+
     public static void main(String[] args) {
 
-        boolean result = ProxyValidater.checkproxy("125.118.65.122", "9999");
+        for (int i=0; i<20; i++) {
+            boolean result = ProxyValidater.checkByProxychecker("113.78.255.10", "9000");
 
-        System.out.println("Proxy validate result: " + result);
+            System.out.println("Proxy validate result: " + result);
+        }
     }
 }

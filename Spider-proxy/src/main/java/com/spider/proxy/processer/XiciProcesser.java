@@ -1,5 +1,6 @@
 package com.spider.proxy.processer;
 
+import com.spider.proxy.enums.ProxyType;
 import com.spider.proxy.utils.ProxyValidater;
 import com.spider.proxy.vo.ProxyVo;
 import us.codecraft.webmagic.Page;
@@ -7,6 +8,7 @@ import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.selector.Selectable;
+import us.codecraft.webmagic.thread.CountableThreadPool;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -23,7 +25,7 @@ public class XiciProcesser implements PageProcessor {
     private String xiciMainPage;
 
     public List<ProxyVo> proxyList = new ArrayList();
-
+    
     private static int pageNo = 1;
 
     public String getXiciMainPage() {
@@ -50,7 +52,8 @@ public class XiciProcesser implements PageProcessor {
                 proxyVo.setAliveTime(infos[5]);
                 proxyVo.setVerifyTime(infos[6] + " " + infos[7]);
 
-                if (ProxyValidater.checkproxy(proxyVo.getIp(),proxyVo.getPort())) {
+                if (ProxyType.HTTP.getType().equalsIgnoreCase(infos[4]) &&
+                ProxyValidater.checkByProxychecker(proxyVo.getIp(),proxyVo.getPort())) {
                     System.out.println("Successed to add new proxy," + proxyVo.getIp() + ":" + proxyVo.getPort());
                     proxyList.add(proxyVo);
 
@@ -62,9 +65,11 @@ public class XiciProcesser implements PageProcessor {
             }
         }
         List links = new ArrayList<String>();
-        links.add(this.getXiciMainPage() + ++pageNo + "/");
-        page.addTargetRequests(links);
-        System.out.println(page.getUrl().toString());
+        if (pageNo<=5) {
+            links.add(this.getXiciMainPage() + ++pageNo + "/");
+            page.addTargetRequests(links);
+        }
+        //System.out.println(page.getUrl().toString());
     }
 
     public Site getSite() {
