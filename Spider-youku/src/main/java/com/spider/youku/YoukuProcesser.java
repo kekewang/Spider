@@ -75,6 +75,6 @@ public class YoukuProcesser implements PageProcessor {
         YoukuProcesser processer = new YoukuProcesser();
         HttpClientDownloader downloader = new HttpClientDownloader();
         downloader.setProxyProvider(processer.getSimpleProxyProvider());
-        Spider.create(processer).addUrl("http://www.youku.com/").setDownloader(downloader).thread(20).run();
+        Spider.create(processer).addUrl("http://www.youku.com/").setDownloader(downloader).thread(100).run();
     }
 }

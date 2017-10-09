@@ -1,6 +1,7 @@
 package com.spider.proxy.processer;
 
 import com.spider.proxy.enums.ProxyType;
+import com.spider.proxy.utils.FileUtil;
 import com.spider.proxy.utils.ProxyValidater;
 import com.spider.proxy.vo.ProxyVo;
 import us.codecraft.webmagic.Page;
@@ -11,8 +12,7 @@ import us.codecraft.webmagic.selector.Selectable;
 import us.codecraft.webmagic.thread.CountableThreadPool;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 /**
@@ -31,6 +31,8 @@ public class XiciProcesser implements PageProcessor {
      * Page No.
      */
     private static int pageNo;
+
+    private Set<String> proxySet = new HashSet<String>();
 
     public String getXiciMainPage() {
         return xiciMainPage;
@@ -76,12 +78,14 @@ public class XiciProcesser implements PageProcessor {
                         @Override
                         public void run() {
                             boolean isValidProxy = ProxyValidater.checkByProxychecker(ip, port);
-                            if (isValidProxy){
-                                saveProxy("/proxy", ip + ":" + port);
-                                System.out.println("Successed to add new proxy," + ip + ":" + port);
+                            String proxy = ip + ":" + port;
+                            if (isValidProxy && !proxySet.contains(proxy)){
+                                proxySet.add(proxy);
+                                FileUtil.saveProxy("/proxy", proxy);
+                                System.out.println("Successed to add new proxy," + proxy);
                             }
                             else {
-                                System.out.println("Failed to add new proxy," + ","+ ip + ":" + port);
+                                System.out.println("Failed to add new proxy," + ","+ proxy);
                             }
                         }
 
@@ -106,24 +110,7 @@ public class XiciProcesser implements PageProcessor {
         return site;
     }
 
-    public synchronized void saveProxy(String file, String proxy){
-        String path = XiciProcesser.class.getResource(file).getPath();
-        BufferedWriter proxyIpWriter = null;
-        try {
-            FileOutputStream outputFile = new FileOutputStream(path,true);
-            OutputStreamWriter writer = new OutputStreamWriter(outputFile);
-            proxyIpWriter = new BufferedWriter(writer);
-            proxyIpWriter.write(proxy);
-            proxyIpWriter.newLine();
-            proxyIpWriter.flush();
-            writer.close();
-            proxyIpWriter.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
 
     public static void main(String[] args){
         String xici = "http://www.xicidaili.com/%s/";
