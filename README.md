@@ -6,4 +6,4 @@ The spider project depends on the webmagic, a web spider framework which is deve
  
 Anything about this project, please let me know!
  
- E-mail: wangke7127@gmail.com
+E-mail: wangke7127@gmail.com
