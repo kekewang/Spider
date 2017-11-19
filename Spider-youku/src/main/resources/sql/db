@@ -1,10 +1,12 @@
 CREATE DATABASE `spider_youkuvideo`;
 
 CREATE TABLE `spider_youkuvideo`.`youku_video` (
-  `vid` VARCHAR(50) NOT NULL,
-  `title` VARCHAR(50) NULL,
-  `url` VARCHAR(50) NULL,
-  `category` VARCHAR(45) NULL,
-  `categoryUrl` VARCHAR(45) NULL,
-  PRIMARY KEY (`vid`))
-COMMENT = 'youku video storage';
+  `vid` varchar(50) NOT NULL,
+  `title` varchar(50) DEFAULT NULL,
+  `url` varchar(50) DEFAULT NULL,
+  `category` varchar(50) DEFAULT NULL,
+  `categoryUrl` varchar(50) DEFAULT NULL,
+  `create_date` date DEFAULT NULL,
+  `update_date` date DEFAULT NULL,
+  PRIMARY KEY (`vid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='youku video storage';
