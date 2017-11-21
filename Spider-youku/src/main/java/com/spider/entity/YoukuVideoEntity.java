@@ -1,4 +1,4 @@
-package com.spider.vo;
+package com.spider.entity;
 
 import java.io.Serializable;
 

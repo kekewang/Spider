@@ -1,5 +1,7 @@
 package com.spider.youku;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Service;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
@@ -18,6 +20,7 @@ import java.util.List;
 /**
  * Created by wangke on 2017/9/22.
  */
+@Service
 public class YoukuProcesser implements PageProcessor {
 
     private Site site = Site.me().setRetryTimes(5).setSleepTime(1000).setTimeOut(10000);
@@ -72,6 +75,8 @@ public class YoukuProcesser implements PageProcessor {
     }
 
     public static void main(String[] args) {
+        //ApplicationContext applicationContext = new
+
         YoukuProcesser processer = new YoukuProcesser();
         HttpClientDownloader downloader = new HttpClientDownloader();
         downloader.setProxyProvider(processer.getSimpleProxyProvider());
