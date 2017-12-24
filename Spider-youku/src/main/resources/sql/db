@@ -3,9 +3,9 @@ CREATE DATABASE `spider_youkuvideo`;
 CREATE TABLE `spider_youkuvideo`.`youku_video` (
   `vid` varchar(50) NOT NULL,
   `title` varchar(50) DEFAULT NULL,
-  `url` varchar(50) DEFAULT NULL,
+  `url` text DEFAULT NULL,
   `category` varchar(50) DEFAULT NULL,
-  `categoryUrl` varchar(50) DEFAULT NULL,
+  `categoryUrl` text DEFAULT NULL,
   `create_date` date DEFAULT NULL,
   `update_date` date DEFAULT NULL,
   PRIMARY KEY (`vid`)

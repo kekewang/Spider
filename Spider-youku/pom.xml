@@ -198,5 +198,10 @@
             <artifactId>spring-context-support</artifactId>
             <version>4.1.6.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>com.spider.common</groupId>
+            <artifactId>Spider-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>

@@ -10,5 +10,5 @@ public interface BaseDao<PK,T> {
 
     void deleteByKey(PK key);
 
-    void updateByKey(PK key, T value);
+    void updateByKey(T value);
 }
