@@ -1,6 +1,7 @@
 package com.spider.youku;
 
 import com.spider.common.constant.SpiderConstants;
+import com.spider.component.ProxyComponent;
 import com.spider.dao.YoukuVideoDAO;
 import com.spider.entity.YoukuVideoEntity;
 import org.apache.commons.lang.time.DateUtils;
@@ -33,23 +34,19 @@ public class YoukuProcesser implements PageProcessor {
 
     private Site site = Site.me().setRetryTimes(5).setSleepTime(1000).setTimeOut(10000);
 
-    public List<Proxy> proxyList = new ArrayList();
-
-    public BufferedReader proxyIpReader = new BufferedReader(new InputStreamReader(YoukuProcesser.class.getResourceAsStream("/config/proxyip.txt")));
 
     public static int pageCount = 0;
 
     @Autowired
     private YoukuVideoDAO youkuVideoDAO;
 
+    @Autowired
+    private ProxyComponent proxyComponent;
+
     public void process(Page page) {
-        //http://v.youku.com/v_show/id_XMzA0OTI4NjcxMg==.html?spm=a2hww.20027244.m_250036.5~5!2~5~5!3~5~5~A
         page.addTargetRequests(page.getHtml().links().regex("//v.youku.com/v_show/id_\\w+.*").all());
         page.putField(SpiderConstants.YOUKU_URL, page.getUrl().toString());
         String title = page.getHtml().xpath("//div[@class='base_info']/h1[@class='title']/allText()").toString();
-        if(title == null || title.isEmpty()){
-            int m = 9;
-        }
         page.putField(SpiderConstants.YOUKU_TITLE, title);
         page.putField(SpiderConstants.YOUKU_CATEGORY, page.getHtml().xpath("//h1[@class='title']/a/text()").toString());
         page.putField(SpiderConstants.YOUKU_CATEGORYURL, page.getHtml().xpath("//h1[@class='title']/a/@href"));
@@ -69,27 +66,7 @@ public class YoukuProcesser implements PageProcessor {
         return site;
     }
 
-    public ProxyProvider getSimpleProxyProvider() {
-        String[] ip = new String[4];
-        try {
-            String socket = null;
-            while ((socket = proxyIpReader.readLine()) != null) {
-                String[] ipandport = socket.split(":");
 
-                if (ipandport.length == 2) {
-                    Proxy proxy = new Proxy(ipandport[0], Integer.parseInt(ipandport[1]));
-                    proxyList.add(proxy);
-                }
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        SimpleProxyProvider proxyProvider = new SimpleProxyProvider(proxyList);
-
-        return proxyProvider;
-    }
 
     public void saveVideo(Page page){
 
@@ -115,7 +92,11 @@ public class YoukuProcesser implements PageProcessor {
 
     public void run(){
         HttpClientDownloader downloader = new HttpClientDownloader();
-        downloader.setProxyProvider(this.getSimpleProxyProvider());
-        Spider.create(this).addUrl("http://www.youku.com/").thread(100).run();
+        downloader.setProxyProvider(proxyComponent.getSimpleProxyProvider());
+        Spider.create(this)
+                .addUrl("http://www.youku.com/")
+                .setDownloader(downloader)
+                .thread(1000)
+                .run();
     }
 }
