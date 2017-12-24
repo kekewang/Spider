@@ -66,8 +66,6 @@ public class YoukuProcesser implements PageProcessor {
         return site;
     }
 
-
-
     public void saveVideo(Page page){
 
         YoukuVideoEntity youkuVideoEntity = new YoukuVideoEntity();
