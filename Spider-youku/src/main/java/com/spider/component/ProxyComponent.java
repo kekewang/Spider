@@ -1,6 +1,6 @@
 package com.spider.component;
 
-import com.spider.youku.YoukuProcesser;
+import com.spider.processer.YoukuProcesser;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.proxy.Proxy;
 import us.codecraft.webmagic.proxy.ProxyProvider;

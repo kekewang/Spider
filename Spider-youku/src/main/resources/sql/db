@@ -1,6 +1,6 @@
-CREATE DATABASE `spider_youkuvideo`;
+CREATE DATABASE `spider`;
 
-CREATE TABLE `spider_youkuvideo`.`youku_video` (
+CREATE TABLE `spider`.`youku_video` (
   `vid` varchar(50) NOT NULL,
   `title` varchar(50) DEFAULT NULL,
   `url` text DEFAULT NULL,
@@ -10,3 +10,19 @@ CREATE TABLE `spider_youkuvideo`.`youku_video` (
   `update_date` date DEFAULT NULL,
   PRIMARY KEY (`vid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='youku video storage';
+
+CREATE TABLE `spider`.`github_project` (
+  `index` varchar(255) NOT NULL,
+  `keyword` varchar(20) DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `author` varchar(50) DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `about` varchar(255) DEFAULT NULL,
+  `readme` text,
+  `fork` varchar(20) DEFAULT NULL,
+  `watch` varchar(20) DEFAULT NULL,
+  `star` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`index`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='github project page';
+
+

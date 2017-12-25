@@ -1,7 +1,7 @@
 package com.spider.github;
 
 import com.spider.BaseSpringTest;
-import junit.framework.TestCase;
+import com.spider.processer.GithubProcesser;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

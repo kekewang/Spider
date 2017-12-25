@@ -1,4 +1,4 @@
-package com.spider.youku;
+package com.spider.processer;
 
 import com.spider.common.constant.SpiderConstants;
 import com.spider.component.ProxyComponent;
@@ -94,7 +94,7 @@ public class YoukuProcesser implements PageProcessor {
         Spider.create(this)
                 .addUrl("http://www.youku.com/")
                 .setDownloader(downloader)
-                .thread(1000)
+                .thread(100)
                 .run();
     }
 }
