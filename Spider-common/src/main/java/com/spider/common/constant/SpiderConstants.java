@@ -20,5 +20,11 @@ public class SpiderConstants {
     public final static String GITHUB_URL = "url";
     public final static String GITHUB_KEYWORD = "keyword";
 
+    public final static String ZHIHU_ID = "id";
+    public final static String ZHIHU_TITLE = "title";
+    public final static String ZHIHU_CONTENT = "content";
+    public final static String ZHIHU_FORK = "fork";
+    public final static String ZHIHU_WATCH = "watch";
+
 
 }
