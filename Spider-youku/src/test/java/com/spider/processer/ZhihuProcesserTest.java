@@ -15,8 +15,7 @@ public class ZhihuProcesserTest extends BaseSpringTest {
     ZhihuProcesser zhihuProcesser;
 
     @Test
-    public void run() throws Exception {
+    public void testProcess() throws Exception {
         zhihuProcesser.run();
     }
-
 }

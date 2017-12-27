@@ -3,45 +3,37 @@
 <mapper namespace="com.spider.dao.ZhihuArticleDAO">
 
     <resultMap id="BaseResultMap" type="com.spider.entity.ZhihuArticleEntity">
-        <id column="index" property="id" jdbcType="VARCHAR" />
-        <result column="url" property="title" jdbcType="VARCHAR" />
-        <result column="author" property="author" jdbcType="VARCHAR" />
-        <result column="name" property="name" jdbcType="VARCHAR" />
-        <result column="about" property="about" jdbcType="VARCHAR" />
-        <result column="readme" property="readme" jdbcType="VARCHAR" />
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="content" property="content" jdbcType="VARCHAR" />
         <result column="fork" property="fork" jdbcType="VARCHAR" />
         <result column="watch" property="watch" jdbcType="VARCHAR" />
-        <result column="star" property="star" jdbcType="VARCHAR" />
     </resultMap>
 
     <insert id="insert" parameterType="com.spider.entity.ZhihuArticleEntity">
-        INSERT INTO `github_project`
-        (`index`, url, author, `name`, about, readme, fork, watch, star)
+        INSERT INTO `zhihu_article`
+        (id, title, content, `fork`, watch)
         VALUES
-        (#{index}, #{url}, #{author}, #{name}, #{about}, #{readme}, #{fork}, #{watch}, #{star})
+        (#{id}, #{title}, #{content}, #{fork}, #{watch})
     </insert>
 
     <select id="selectByKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         SELECT
           *
         FROM
-          `github_project`
+          `zhihu_article`
         WHERE
-          `index` = #{index};
+          id = #{id};
     </select>
     <update id="updateByKey" parameterType="com.spider.entity.ZhihuArticleEntity">
         UPDATE
-          `github_project`
+          `zhihu_article`
         SET
-          url = #{url},
-          author = #{author},
-          `name` = #{name},
-          about = #{about},
-          readme = #{readme},
+          title = #{title},
+          content = #{content},
           fork = #{fork},
-          watch = #{watch},
-          star = #{star}
+          watch = #{watch}
         WHERE
-          `index` = #{index};
+          id = #{id};
     </update>
 </mapper>

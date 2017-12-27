@@ -2,6 +2,8 @@ package com.spider.processer;
 
 import com.spider.common.constant.SpiderConstants;
 import com.spider.component.ProxyComponent;
+import com.spider.dao.ZhihuAnswerDAO;
+import com.spider.dao.ZhihuArticleDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import us.codecraft.webmagic.Page;
@@ -18,9 +20,14 @@ public class ZhihuProcesser implements PageProcessor {
 
     private Site site = Site.me().setRetryTimes(5).setSleepTime(1000).setTimeOut(10000);
 
-
     @Autowired
     private ProxyComponent proxyComponent;
+
+    @Autowired
+    ZhihuAnswerDAO zhihuAnswerDAO;
+
+    @Autowired
+    ZhihuArticleDAO zhihuArticleDAO;
 
     @Override
     public void process(Page page) {

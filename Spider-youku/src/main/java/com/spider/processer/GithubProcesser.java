@@ -89,7 +89,7 @@ public class GithubProcesser implements PageProcessor {
         HttpClientDownloader downloader = new HttpClientDownloader();
         downloader.setProxyProvider(proxyComponent.getSimpleProxyProvider());
         Spider.create(this)
-                .addUrl("https://github.com/search?q=java")
+                .addUrl("https://github.com/search?q=spark")
                 //.setDownloader(downloader)
                 .thread(1000)
                 .run();
