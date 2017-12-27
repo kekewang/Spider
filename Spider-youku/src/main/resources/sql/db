@@ -25,4 +25,27 @@ CREATE TABLE `spider`.`github_project` (
   PRIMARY KEY (`index`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='github project page';
 
+CREATE TABLE `spider`.`zhihu_article` (
+  `id` varchar(50) NOT NULL,
+  `title` varchar(20) DEFAULT NULL,
+  `author` varchar(50) DEFAULT NULL,
+  `content` text DEFAULT NULL,
+  `fork` varchar(50) DEFAULT NULL,
+  `watch` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='zhihu article page';
+
+CREATE TABLE `spider`.`zhihu_answer` (
+  `id` varchar(50) NOT NULL,
+  `aid` varchar(50) NOT NULL,
+  `title` varchar(20) DEFAULT NULL,
+  `author` varchar(50) DEFAULT NULL,
+  `type` varchar(20) DEFAULT NULL,
+  `voters` varchar(20) DEFAULT NULL,
+  `content` text DEFAULT NULL,
+  `date` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='zhihu answer page';
+
+
 
