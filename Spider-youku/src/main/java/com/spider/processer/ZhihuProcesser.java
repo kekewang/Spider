@@ -2,6 +2,7 @@ package com.spider.processer;
 
 import com.spider.common.constant.SpiderConstants;
 import com.spider.component.ProxyComponent;
+import com.spider.component.SimulateLogin;
 import com.spider.dao.ZhihuAnswerDAO;
 import com.spider.dao.ZhihuArticleDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +74,11 @@ public class ZhihuProcesser implements PageProcessor {
     }
 
     public void run(){
+        if(SimulateLogin.dataPreparation())
+            SimulateLogin.login();
+        else
+            System.err.println("登陆数据准备失败");
+
         HttpClientDownloader downloader = new HttpClientDownloader();
         downloader.setProxyProvider(proxyComponent.getSimpleProxyProvider());
         Spider.create(this)
