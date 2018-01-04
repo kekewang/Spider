@@ -2,7 +2,7 @@ package com.spider.processer;
 
 import com.spider.common.constant.SpiderConstants;
 import com.spider.component.ProxyComponent;
-import com.spider.component.SimulateLogin;
+import com.spider.component.ZhihuLoginComponent;
 import com.spider.dao.ZhihuAnswerDAO;
 import com.spider.dao.ZhihuArticleDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +11,9 @@ import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.downloader.HttpClientDownloader;
-import us.codecraft.webmagic.pipeline.FilePipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -40,6 +39,9 @@ public class ZhihuProcesser implements PageProcessor {
 
     @Autowired
     ZhihuArticleDAO zhihuArticleDAO;
+
+    @Autowired
+    ZhihuLoginComponent zhihuLoginComponent;
 
     String regEx = "^/question/[0-9]*/answer/[0-9]*";
     private Pattern pattern = Pattern.compile(regEx);
@@ -74,10 +76,11 @@ public class ZhihuProcesser implements PageProcessor {
     }
 
     public void run(){
-        if(SimulateLogin.dataPreparation())
-            SimulateLogin.login();
-        else
-            System.err.println("登陆数据准备失败");
+        try {
+            zhihuLoginComponent.login();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         HttpClientDownloader downloader = new HttpClientDownloader();
         downloader.setProxyProvider(proxyComponent.getSimpleProxyProvider());
