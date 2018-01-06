@@ -32,7 +32,7 @@ import java.util.List;
 @Service
 public class YoukuProcesser implements PageProcessor {
 
-    private Site site = Site.me().setRetryTimes(5).setSleepTime(1000).setTimeOut(10000);
+    private Site site = Site.me().setRetryTimes(10).setSleepTime(1000).setTimeOut(1000);
 
 
     public static int pageCount = 0;
@@ -94,7 +94,7 @@ public class YoukuProcesser implements PageProcessor {
         Spider.create(this)
                 .addUrl("http://www.youku.com/")
                 .setDownloader(downloader)
-                .thread(100)
+                .thread(10)
                 .run();
     }
 }
