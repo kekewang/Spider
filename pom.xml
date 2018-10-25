@@ -12,6 +12,7 @@
     <modules>
         <module>Spider-common</module>
         <module>Spider-youku</module>
+        <module>Spider-snm</module>
         <module>Spider-proxy</module>
     </modules>
 
@@ -43,17 +44,6 @@
         </dependency>
     </dependencies>
 
-    <repositories>
-        <repository>
-            <id>central</id>
-            <name>Central Repository</name>
-            <url>https://repo.maven.apache.org/maven2</url>
-            <layout>default</layout>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
     <build>
         <plugins>
 
@@ -88,7 +78,7 @@
                     <overwrite>true</overwrite>
                 </configuration>
             </plugin>
-    </plugins>
+        </plugins>
 
 
         <extensions>
@@ -100,5 +90,17 @@
         </extensions>
     </build>
 
+    <distributionManagement>
+        <repository>
+            <id>nexus</id>
+            <name>Releases</name>
+            <url>http://localhost:8081/repository/nexus-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus</id>
+            <name>Snapshot</name>
+            <url>http://localhost:8081/repository/nexus-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 </project>

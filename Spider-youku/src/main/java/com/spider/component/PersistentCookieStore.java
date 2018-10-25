@@ -6,10 +6,7 @@ import org.apache.http.cookie.Cookie;
 import org.springframework.stereotype.Component;
 
 import java.net.HttpCookie;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
@@ -23,13 +20,26 @@ public class PersistentCookieStore implements CookieStore {
     @Override
     public void addCookie(Cookie cookie) {
         if (cookie.isExpired(new Date())){
-            //cookies.containsKey(cookie.getName())
+            if(cookies.containsKey(cookie.getName())){
+                cookies.put(cookie.getName(), cookie);
+            }
+            else {
+                cookies.remove(cookie.getName());
+            }
         }
     }
 
     @Override
     public List<Cookie> getCookies() {
-        return null;
+        List<Cookie> cookies = new ArrayList<Cookie>();
+        Iterator iterator = this.cookies.keySet().iterator();
+        while (iterator.hasNext()){
+            String key = (String) iterator.next();
+            Cookie cookie = this.cookies.get(key);
+
+            cookies.add(cookie);
+        }
+        return cookies;
     }
 
     @Override

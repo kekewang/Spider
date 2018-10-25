@@ -26,5 +26,12 @@ public class SpiderConstants {
     public final static String ZHIHU_FORK = "fork";
     public final static String ZHIHU_WATCH = "watch";
 
+    //sounimei
+    public final static String SNM_FILEID = "id";
+    public final static String SNM_FILENAME = "fileName";
+    public final static String SNM_FILESIZE = "fileSize";
+    public final static String SNM_FILETYPE = "fileType";
+    public final static String SNM_DOWNLOADURL = "fileDownloadURL";
+
 
 }

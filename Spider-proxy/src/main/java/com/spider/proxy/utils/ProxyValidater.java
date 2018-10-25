@@ -1,6 +1,6 @@
 package com.spider.proxy.utils;
 
-import com.spider.common.utils.StringUtil;
+import com.spider.common.utils.StringUtils;
 import org.apache.http.*;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -61,7 +61,7 @@ public class ProxyValidater {
         String params = String.format("data=%s&type=proxycheck&arg=p=%s_t=1_o=5", ip, port);
         String content = HttpRequestUtil.sendPost(proxyChecker, params);
 
-        String str = StringUtil.chinaToUnicode("属于");
+        String str = StringUtils.chinaToUnicode("属于");
         if(content != null && content.indexOf(str) != -1 )
             isValid =  true;
 

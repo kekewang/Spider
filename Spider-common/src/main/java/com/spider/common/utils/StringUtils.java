@@ -3,7 +3,7 @@ package com.spider.common.utils;
 /**
  * Created by wangke on 2017/10/9.
  */
-public class StringUtil {
+public class StringUtils {
 
     public static String chinaToUnicode(String str){
         String result="";
