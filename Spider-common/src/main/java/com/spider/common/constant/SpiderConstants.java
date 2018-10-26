@@ -31,6 +31,8 @@ public class SpiderConstants {
     public final static String SNM_FILENAME = "fileName";
     public final static String SNM_FILESIZE = "fileSize";
     public final static String SNM_FILETYPE = "fileType";
+    public final static String SNM_FILESUBTYPE = "fileSubType";
+    public final static String SNM_RESOLUTION = "resolution";
     public final static String SNM_DOWNLOADURL = "fileDownloadURL";
 
 

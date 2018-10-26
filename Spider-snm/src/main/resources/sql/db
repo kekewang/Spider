@@ -1,24 +1,25 @@
 CREATE TABLE `spider`.`snm` (
-  `id` INT NOT NULL COMMENT '资源id',
+  `id` INT NOT NULL auto_increment COMMENT '资源id',
   `name` VARCHAR(255) NULL COMMENT '资源名',
   `type` TINYINT NULL COMMENT '资源类型',
+  `sub_type` TINYINT NULL COMMENT '资源二级类型',
   `size` VARCHAR(45) NULL,
   `page_url` VARCHAR(255) NULL,
   `download_url` VARCHAR(255) NULL,
   `file_id` VARCHAR(255) NULL,
   `description` TEXT NULL,
-  `update_time` DATETIME NULL,
-  `create_time` DATETIME NULL,
+  `update_time` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `create_time` DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`))
 COMMENT = '收你妹资源表';
 
 CREATE TABLE `spider`.`snm_file` (
-  `id` INT NOT NULL COMMENT '文件id',
+  `id` INT NOT NULL auto_increment COMMENT '文件id',
   `name` VARCHAR(255) NULL COMMENT '文件名',
   `origin_name` VARCHAR(255) NULL COMMENT '文件原名',
   `path` VARCHAR(255) NULL COMMENT '目录',
-  `update_time` DATETIME NULL,
-  `create_time` DATETIME NULL,
+  `update_time` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `create_time` DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`))
 COMMENT = '收你妹文件资源表';
 
