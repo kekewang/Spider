@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context-3.2.xsd
+         http://www.springframework.org/schema/aop
+         http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+         http://www.springframework.org/schema/tx 
+         http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+
+	<bean id="appDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName">
+			<value>${config.jdbc.driverClass}</value>
+		</property>
+		<property name="url">
+			<value>${config.jdbc.url}</value>
+		</property>
+		<property name="username">
+			<value>${config.jdbc.user}</value>
+		</property>
+		<property name="password">
+			<value>${config.jdbc.password}</value>
+		</property>
+		<property name="maxActive">
+			<value>${jdbc.maxActive}</value>
+		</property>
+		<property name="maxIdle">
+			<value>${jdbc.maxIdle}</value>
+		</property>
+		<property name="initialSize">
+			<value>${jdbc.initialSize}</value>
+		</property>
+		<property name="testWhileIdle" value="${jdbc.testWhileIdle:true}" />
+		<property name="removeAbandoned" value="${jdbc.removeAbandoned:true}" />
+		<property name="removeAbandonedTimeout" value="${jdbc.removeAbandonedTimeout:30}" />
+		<property name="validationQuery">
+			<value>${jdbc.validationQuery}</value>
+		</property>
+		<property name="minEvictableIdleTimeMillis">
+			<value>${jdbc.minEvictableIdleTimeMillis}</value>
+		</property>
+		<property name="connectionProperties">
+			<value>${jdbc.connectionProperties}</value>
+		</property> 
+	</bean>
+
+	<!-- 配置Jdbc模板 -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="appDataSource" />
+	</bean>
+
+	<bean id="appTransactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="appDataSource" />
+	</bean>
+
+	<!-- 开启暴露Aop代理到ThreadLocal支持 如下配置方式从 spring3开始支持） -->
+	<!-- 注解风格支持 -->
+	<aop:aspectj-autoproxy expose-proxy="true" />
+
+
+	<!-- 启用注解式事务，可以与声明式事务共存 主要用于独立事务的配置 -->
+	<tx:annotation-driven proxy-target-class="true"
+		transaction-manager="appTransactionManager" order="0" />
+
+
+	<!-- 启用声明式事务，为所有一般性方法添加事务 -->
+	<aop:config>
+		<aop:pointcut id="appTxOperation"
+			expression="execution(* com.snm.service..*.*(..))" />
+		<aop:advisor pointcut-ref="appTxOperation" advice-ref="appTxAdvice"
+			order="1" />
+	</aop:config>
+
+	<tx:advice id="appTxAdvice" transaction-manager="appTransactionManager">
+		<tx:attributes>
+			<tx:method name="query*" propagation="SUPPORTS" />
+			<tx:method name="find*" propagation="SUPPORTS" />
+			<tx:method name="get*" propagation="SUPPORTS" />
+			<tx:method name="list*" propagation="SUPPORTS" />
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+
+
+	<!-- define the SqlSessionFactory -->
+	<bean id="appSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="appDataSource" />
+		<property name="configLocation" value="classpath:/mybatis/mybatis-config.xml" />
+	</bean>
+
+
+	<!-- domian与db的内存映射生成    默认根据domain自动生成基础mapper-->  
+	<bean id="mappingManager" class="com.slob.dao.mapping.AnnotationMappingManager"
+		init-method="buildMapping">
+		<property name="sqlSessionFactory" ref="appSqlSessionFactory" />
+		<property name="pagckages">
+			<list>
+				<value>com.snm.entity</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 自动在内存中生成一般性的mybatis mapper并注册到config中 -->
+	<bean id="DynamicMapperGenerator" class="com.slob.dao.mybatis.DynamicMapperGenerator"
+		init-method="generateMybatisMapper">
+		<property name="mappingManager" ref="mappingManager" />
+		<property name="sqlSessionFactory" ref="appSqlSessionFactory" />
+		<property name="mapperLocations">
+			<list>
+		 		<value>classpath*:/mybatis/extmapper/*.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 统一数据管理中心 -->
+	<bean id="dataRepository" class="com.slob.dao.mybatis.MybatisDataRepository">
+		<property name="sqlSessionFactory" ref="appSqlSessionFactory"></property>
+		<property name="mappingManager" ref="mappingManager" />
+		<property name="dialect" value="${jdbc.dialect}" />
+		<property name="dynamicMapperGenerator" ref="DynamicMapperGenerator"></property>
+	</bean>
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.snm.dao" />
+		<property name="sqlSessionFactoryBeanName" value="appSqlSessionFactory" />
+	</bean>
+
+</beans>

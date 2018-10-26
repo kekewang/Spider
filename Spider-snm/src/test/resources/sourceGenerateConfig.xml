@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <url>jdbc:mysql://127.0.0.1:3306/spider</url>
+    <jdbcDriverName>com.mysql.jdbc.Driver</jdbcDriverName>
+    <user>root</user>
+    <passwd>wk20100605hq</passwd>
+    <catalog>spider</catalog>
+    <schema>spider</schema>
+    <!-- 1个tab 与eclipse一致 , trim=false 时tab或空不会被trim掉 -->
+    <indent trim="false"></indent>
+    <!-- 	<superType>com.slob.core.Entity</superType> -->
+    <superType>com.snm.entity.BaseEntity</superType>
+    <plugins>
+        <!-- 		<plugin>com.slob.dao.DataObjectGeneratePluginImpl</plugin> -->
+    </plugins>
+    <path>G:\\snm</path>
+
+    <packageName>com.snm.domain</packageName>
+    <tables>
+        <!-- <table name="lmt_account_info" schema="CLMSUSER" tablePrex="U_" /> -->
+        <!-- 		<table name="sm_merchant_ext_info" /> -->
+        <!-- 		<table name="sm_merchant_register" /> -->
+        <!-- 		<table name="sm_merchant_sales_change" /> -->
+        <!-- 		<table name="merchant_trans_balance"/> -->
+        <!-- <table name="DEPT" /> -->
+        <!-- <table name="BONUS" /> -->
+        <!-- 		<table name="LIQ_TRANS_RECO_RESULT" /> -->
+        <!-- 		<table name="config_business_fund_type" /> -->
+        <!-- 		<table name="JOB_TASK_STEP" /> -->
+        <table name="snm_file" />
+        <table name="snm" />
+    </tables>
+
+
+    <!-- <data> -->
+    <!-- <url>jdbc:sqlserver://127.0.0.1:1433</url> -->
+    <!-- <user>sa</user> -->
+    <!-- <passwd>sasa</passwd> -->
+    <!-- <catalog>monitordb</catalog> -->
+    <!-- <schema>dbo</schema> -->
+    <!-- <jdbcDriverName>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbcDriverName> -->
+    <!-- <mappingFileName>mapping.xml</mappingFileName> -->
+    <!-- <packageName>com.gouzai.ems.data</packageName> -->
+    <!-- <path>D:\test</path> -->
+    <!-- <tables> -->
+    <!-- <table name="mushroom" schema="monitordb"> -->
+    <!-- </table> -->
+    <!-- <table name="monitor" schema="monitordb"> -->
+    <!-- </table> -->
+    <!-- </tables> -->
+    <!-- </data> -->
+</config>
+				

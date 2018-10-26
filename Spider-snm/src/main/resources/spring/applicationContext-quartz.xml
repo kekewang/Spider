@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:aop="http://www.springframework.org/schema/aop" xmlns:cache="http://www.springframework.org/schema/cache"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/cache
+        http://www.springframework.org/schema/cache/spring-cache.xsd">
+	<!--&lt;!&ndash; 定时器工作调度的bean &ndash;&gt;-->
+	<!--<bean id="refreshAppInfoJob" class="com.wsm.job.RefreshAppInfoJob" />-->
+
+	<!--&lt;!&ndash; job的配置开始 &ndash;&gt;-->
+	<!--<bean id="refreshAppInfoJobDetail"-->
+		  <!--class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+		<!--<property name="targetObject">-->
+			<!--<ref bean="refreshAppInfoJob" />-->
+		<!--</property>-->
+		<!--<property name="targetMethod">-->
+			<!--<value>execute</value>-->
+		<!--</property>-->
+	<!--</bean>-->
+	<!--&lt;!&ndash; 调度的配置开始 &ndash;&gt;-->
+	<!--<bean id="cronJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+		<!--<property name="jobDetail">-->
+			<!--<ref bean="refreshAppInfoJobDetail" />-->
+		<!--</property>-->
+		<!--<property name="cronExpression">-->
+			<!--<value>0/0 0 * * * ?</value>-->
+		<!--</property>-->
+	<!--</bean>-->
+	<!--&lt;!&ndash; 启动触发器的配置开始 &ndash;&gt;-->
+	<!--<bean name="startQuertz" lazy-init="false" autowire="no"-->
+		  <!--class="org.springframework.scheduling.quartz.SchedulerFactoryBean">-->
+		<!--<property name="triggers">-->
+			<!--<list>-->
+				<!--<ref bean="cronJobTrigger" />-->
+			<!--</list>-->
+		<!--</property>-->
+	<!--</bean>-->
+</beans>
