@@ -86,8 +86,10 @@ public class ShouNmProcesser extends AbstractHttpClient implements PageProcessor
                 snm.setDownloadUrl(page.getResultItems().get(SpiderConstants.SNM_DOWNLOADURL));
                 snm.setPageUrl(page.getUrl().toString());
                 snm.setSize(page.getResultItems().get(SpiderConstants.SNM_FILESIZE));
-                //snm.setType(page.getResultItems().get(SpiderConstants.SNM_FILETYPE));
+                //snm.setType(Type.getTypeByName(page.getResultItems().get(SpiderConstants.SNM_FILETYPE)).getValue());
                 //snm.setSubType(page.getResultItems().get(SpiderConstants.SNM_FILESUBTYPE));
+                logger.info(page.getResultItems().get(SpiderConstants.SNM_FILETYPE));
+                logger.info(page.getResultItems().get(SpiderConstants.SNM_FILESUBTYPE));
                 snm.setCreateTime(new Timestamp(new Date().getTime()));
                 snm.setUpdateTime(new Timestamp(new Date().getTime()));
                 snmDao.save(snm);

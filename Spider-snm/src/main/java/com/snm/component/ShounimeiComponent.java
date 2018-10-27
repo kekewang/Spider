@@ -251,7 +251,7 @@ public class ShounimeiComponent extends AbstractHttpClient {
                 }
                 snmFile.setOriginName(fileName);
 
-                String newFileName = UUID.randomUUID().toString() + fileName.substring(fileName.lastIndexOf("."));
+                String newFileName = UUID.randomUUID().toString();
                 snmFile.setName(newFileName);
 
                 String responseString = new BasicResponseHandler().handleResponse(response);

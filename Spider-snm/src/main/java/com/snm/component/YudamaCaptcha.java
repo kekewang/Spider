@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.snm.model.AbstractHttpClient;
 import com.snm.utils.StringUtils;
+import com.spider.common.exception.SpiderException;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.config.RequestConfig;
@@ -100,7 +101,8 @@ public class YudamaCaptcha extends AbstractHttpClient {
                 logger.error("Resolve captcha failed.");
             }
         }
-        return "";
+
+        throw new SpiderException("Resolve captcha failed.");
     }
 
     private String captchaText(String cid) throws IOException {

@@ -17,37 +17,8 @@
 
     <packageName>com.snm.domain</packageName>
     <tables>
-        <!-- <table name="lmt_account_info" schema="CLMSUSER" tablePrex="U_" /> -->
-        <!-- 		<table name="sm_merchant_ext_info" /> -->
-        <!-- 		<table name="sm_merchant_register" /> -->
-        <!-- 		<table name="sm_merchant_sales_change" /> -->
-        <!-- 		<table name="merchant_trans_balance"/> -->
-        <!-- <table name="DEPT" /> -->
-        <!-- <table name="BONUS" /> -->
-        <!-- 		<table name="LIQ_TRANS_RECO_RESULT" /> -->
-        <!-- 		<table name="config_business_fund_type" /> -->
-        <!-- 		<table name="JOB_TASK_STEP" /> -->
-        <table name="snm_file" />
-        <table name="snm" />
+        <table name="snm_type" />
+        <table name="snm_subtype" />
     </tables>
-
-
-    <!-- <data> -->
-    <!-- <url>jdbc:sqlserver://127.0.0.1:1433</url> -->
-    <!-- <user>sa</user> -->
-    <!-- <passwd>sasa</passwd> -->
-    <!-- <catalog>monitordb</catalog> -->
-    <!-- <schema>dbo</schema> -->
-    <!-- <jdbcDriverName>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbcDriverName> -->
-    <!-- <mappingFileName>mapping.xml</mappingFileName> -->
-    <!-- <packageName>com.gouzai.ems.data</packageName> -->
-    <!-- <path>D:\test</path> -->
-    <!-- <tables> -->
-    <!-- <table name="mushroom" schema="monitordb"> -->
-    <!-- </table> -->
-    <!-- <table name="monitor" schema="monitordb"> -->
-    <!-- </table> -->
-    <!-- </tables> -->
-    <!-- </data> -->
 </config>
 				

@@ -23,3 +23,18 @@ CREATE TABLE `spider`.`snm_file` (
   PRIMARY KEY (`id`))
 COMMENT = '收你妹文件资源表';
 
+CREATE TABLE `spider`.`snm_type` (
+  `id` INT NOT NULL auto_increment COMMENT 'id',
+  `type_id` INT NULL COMMENT '类型id',
+  `type_name` VARCHAR(255) NULL COMMENT '类型名',
+  PRIMARY KEY (`id`))
+COMMENT = '收你妹资源类型表';
+
+CREATE TABLE `spider`.`snm_subtype` (
+  `id` INT NOT NULL auto_increment COMMENT 'id',
+  `subtype_parent_id` INT NULL COMMENT '父类型id',
+  `subtype_id` INT NULL COMMENT '类型id',
+  `subtype_name` VARCHAR(255) NULL COMMENT '类型名',
+  PRIMARY KEY (`id`))
+COMMENT = '收你妹资源子类型表';
+
