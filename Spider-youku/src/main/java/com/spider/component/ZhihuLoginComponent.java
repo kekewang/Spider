@@ -93,7 +93,8 @@ public class ZhihuLoginComponent {
                 cookieStore.addCookie(cookie);
             }
         } finally {
-            response.close();
+            if (response!=null)
+                response.close();
         }
     }
 

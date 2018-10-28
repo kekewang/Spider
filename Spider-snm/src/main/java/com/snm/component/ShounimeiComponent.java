@@ -99,7 +99,8 @@ public class ShounimeiComponent extends AbstractHttpClient {
             }
 
         } finally {
-            response.close();
+            if (response!=null)
+                response.close();
         }
         logger.info("get imagehash, {}", imagehash);
         return imagehash;
@@ -267,8 +268,13 @@ public class ShounimeiComponent extends AbstractHttpClient {
                         , path
                         , responseString.getBytes("ISO-8859-1"));
             }
-        } finally {
-            response.close();
+        }
+        catch (Exception e){
+            logger.error("Download torrent failed, {}", e.getMessage());
+        }
+        finally {
+            if (response!=null)
+                response.close();
         }
 
         return snmFile;

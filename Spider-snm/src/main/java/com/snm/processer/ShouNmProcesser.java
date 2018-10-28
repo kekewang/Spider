@@ -102,7 +102,10 @@ public class ShouNmProcesser extends AbstractHttpClient implements PageProcessor
                 snmDao.save(snm);
             }
         } catch (Exception e) {
-            logger.error("Parsing page failed, url={}, {}", page.getUrl(), e.getMessage());
+            logger.error("Parsing page failed, url={}, {}, {}"
+                    , page.getUrl()
+                    , e.getMessage()
+                    , page.getResultItems());
         }
     }
 
@@ -124,11 +127,8 @@ public class ShouNmProcesser extends AbstractHttpClient implements PageProcessor
 
     public void run() {
         logger.info("Starting spider...");
-        HttpClientDownloader downloader = new HttpClientDownloader();
-        //downloader.setProxyProvider(proxyComponent.getSimpleProxyProvider());
         Spider.create(this)
-                .addUrl("http://pt.aipt123.org/table_list.php")
-                //.setDownloader(downloader)
+                .addUrl("http://pt.aipt123.org/details.php?id=148116&hit=1")
                 .thread(50)
                 .run();
     }
