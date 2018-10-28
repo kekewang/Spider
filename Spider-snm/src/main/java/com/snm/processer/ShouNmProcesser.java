@@ -2,14 +2,17 @@ package com.snm.processer;
 
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.core.util.StatusPrinter;
+import com.alibaba.fastjson.JSONObject;
 import com.snm.component.ProxyComponent;
 import com.snm.component.ShounimeiComponent;
 import com.snm.dao.SnmDao;
 import com.snm.dao.SnmFileDao;
+import com.snm.dao.SnmTypeDao;
 import com.snm.entity.Snm;
 import com.snm.entity.SnmFile;
 import com.snm.model.AbstractHttpClient;
 import com.snm.utils.StringUtils;
+import com.snm.vo.TypeSubType;
 import com.spider.common.constant.SpiderConstants;
 import com.spider.common.exception.SpiderException;
 import com.spider.common.utils.SpiderUtils;
@@ -54,6 +57,9 @@ public class ShouNmProcesser extends AbstractHttpClient implements PageProcessor
     @Resource
     private SnmDao snmDao;
 
+    @Resource
+    private SnmTypeDao snmTypeDao;
+
     public void process(Page page) {
         logger.info("Parsing page: {}", page.getUrl());
         try {
@@ -86,12 +92,13 @@ public class ShouNmProcesser extends AbstractHttpClient implements PageProcessor
                 snm.setDownloadUrl(page.getResultItems().get(SpiderConstants.SNM_DOWNLOADURL));
                 snm.setPageUrl(page.getUrl().toString());
                 snm.setSize(page.getResultItems().get(SpiderConstants.SNM_FILESIZE));
-                //snm.setType(Type.getTypeByName(page.getResultItems().get(SpiderConstants.SNM_FILETYPE)).getValue());
-                //snm.setSubType(page.getResultItems().get(SpiderConstants.SNM_FILESUBTYPE));
-                logger.info(page.getResultItems().get(SpiderConstants.SNM_FILETYPE));
-                logger.info(page.getResultItems().get(SpiderConstants.SNM_FILESUBTYPE));
+                TypeSubType typeSubType = snmTypeDao.loadTypesByName(page.getResultItems().get(SpiderConstants.SNM_FILETYPE),
+                page.getResultItems().get(SpiderConstants.SNM_FILESUBTYPE));
+                snm.setType(typeSubType.getTypeId());
+                snm.setSubType(typeSubType.getSubtypeId());
                 snm.setCreateTime(new Timestamp(new Date().getTime()));
                 snm.setUpdateTime(new Timestamp(new Date().getTime()));
+                logger.info(JSONObject.toJSONString(snm));
                 snmDao.save(snm);
             }
         } catch (Exception e) {

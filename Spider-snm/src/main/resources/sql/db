@@ -1,8 +1,8 @@
 CREATE TABLE `spider`.`snm` (
   `id` INT NOT NULL auto_increment COMMENT '资源id',
   `name` VARCHAR(255) NULL COMMENT '资源名',
-  `type` TINYINT NULL COMMENT '资源类型',
-  `sub_type` TINYINT NULL COMMENT '资源二级类型',
+  `type` INT NULL COMMENT '资源类型',
+  `sub_type` INT NULL COMMENT '资源二级类型',
   `size` VARCHAR(45) NULL,
   `page_url` VARCHAR(255) NULL,
   `download_url` VARCHAR(255) NULL,
