@@ -77,7 +77,7 @@ public class XiciProcesser implements PageProcessor {
 
                         @Override
                         public void run() {
-                            boolean isValidProxy = ProxyValidater.checkByProxychecker(ip, port);
+                            boolean isValidProxy = ProxyValidater.checkProxy(ip, port);
                             String proxy = ip + ":" + port;
                             if (isValidProxy && !proxySet.contains(proxy)){
                                 proxySet.add(proxy);

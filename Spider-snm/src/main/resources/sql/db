@@ -38,3 +38,12 @@ CREATE TABLE `spider`.`snm_subtype` (
   PRIMARY KEY (`id`))
 COMMENT = '收你妹资源子类型表';
 
+CREATE TABLE `spider`.`failed_record` (
+  `id` INT NOT NULL auto_increment COMMENT 'id',
+  `url` VARCHAR(255) NULL COMMENT '失败地址',
+  `processer` VARCHAR(255) NULL COMMENT '处理器',
+  `status` INT DEFAULT 0 COMMENT '状态',
+  `times` INT DEFAULT 0 COMMENT '重试次数',
+  PRIMARY KEY (`id`))
+COMMENT = '爬虫失败记录表';
+

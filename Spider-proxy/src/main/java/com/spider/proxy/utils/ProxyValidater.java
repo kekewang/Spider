@@ -2,13 +2,27 @@ package com.spider.proxy.utils;
 
 import com.spider.common.utils.StringUtils;
 import org.apache.http.*;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.params.ConnRoutePNames;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.apache.http.params.CoreConnectionPNames;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
-import java.net.InetAddress;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.*;
 
 public class ProxyValidater {
 
@@ -66,6 +80,56 @@ public class ProxyValidater {
             isValid =  true;
 
         return isValid;
+    }
+
+    public static boolean checkProxy(String ip, String port) {
+        String result = "";
+        BufferedReader in = null;
+        try {
+            URL realUrl = new URL("https://movie.douban.com/subject/30149826/");
+
+            // 创建代理服务器
+            InetSocketAddress addr = new InetSocketAddress(ip, Integer.valueOf(port));
+            Proxy proxy = new Proxy(Proxy.Type.HTTP, addr); //http 代理
+
+            // 打开和URL之间的连接
+            URLConnection connection = realUrl.openConnection(proxy);
+
+            // 设置通用的请求属性
+            connection.setRequestProperty("accept", "*/*");
+            connection.setRequestProperty("connection", "Keep-Alive");
+            connection.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+            connection.setRequestProperty("Content-type", "application/x-www-form-urlencoded;");
+            connection.setConnectTimeout(10000);
+            connection.setReadTimeout(10000);
+
+            // 建立实际的连接
+            connection.connect();
+
+            // 定义 BufferedReader输入流来读取URL的响应
+            in = new BufferedReader(new InputStreamReader(connection.getInputStream(), "gbk"));
+            String line;
+            while ((line = in.readLine()) != null) {
+                result += line;
+            }
+            Document doc = Jsoup.parse(new String(result.getBytes("ISO-8859-1")));
+            String title = doc.select("span[property=v:itemreviewed]").text();
+            if (title.contains("Fauve"))
+                return true;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        finally {
+            try {
+                if (in != null) {
+                    in.close();
+                }
+            } catch (Exception e) {
+
+            }
+        }
+        return false;
     }
 
     public static void main(String[] args) {

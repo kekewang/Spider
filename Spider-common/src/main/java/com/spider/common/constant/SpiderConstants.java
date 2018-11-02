@@ -35,5 +35,26 @@ public class SpiderConstants {
     public final static String SNM_RESOLUTION = "resolution";
     public final static String SNM_DOWNLOADURL = "fileDownloadURL";
 
+    //douban
+    public final static String DOUBAN_SUBJECT = "subject";
+    public final static String DOUBAN_TITLE = "title";
+    public final static String DOUBAN_YEAR = "year";
+    public final static String DOUBAN_MAINPIC = "mainpic";
+    public final static String DOUBAN_DIRECTOR = "director";
+    public final static String DOUBAN_SCENARIST = "scenarist";
+    public final static String DOUBAN_ACTOR = "actor";
+    public final static String DOUBAN_CATEGORY = "category";
+    public final static String DOUBAN_WEBSITE = "website";
+    public final static String DOUBAN_COUNTRY = "country";
+    public final static String DOUBAN_LANGUAGE = "language";
+    public final static String DOUBAN_RELEASETIME = "releasetime";
+    public final static String DOUBAN_TIME = "time";
+    public final static String DOUBAN_NAME1 = "name1";
+    public final static String DOUBAN_IMDBURL = "imdburl";
+    public final static String DOUBAN_SCORE = "score";
+    public final static String DOUBAN_SUMMARY = "summary";
+    public final static String DOUBAN_CONTENT = "content";
+    public final static String DOUBAN_CELEBRITY = "celebrity";
+
 
 }

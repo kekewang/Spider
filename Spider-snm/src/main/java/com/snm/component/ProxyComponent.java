@@ -20,7 +20,7 @@ public class ProxyComponent {
     public List<Proxy> proxyList = new ArrayList();
 
     public ProxyProvider getSimpleProxyProvider() {
-        BufferedReader proxyIpReader = new BufferedReader(new InputStreamReader(ProxyComponent.class.getResourceAsStream("/config/proxyip.txt")));
+        BufferedReader proxyIpReader = new BufferedReader(new InputStreamReader(ProxyComponent.class.getResourceAsStream("/config/proxyip")));
 
         String[] ip = new String[4];
         try {
