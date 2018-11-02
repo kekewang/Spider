@@ -20,7 +20,7 @@
 
         <!-- mybatis version -->
         <mybatis.version>3.2.8</mybatis.version>
-        <slob.version>1.0-SNAPSHOT</slob.version>
+
 
         <!-- mysql driver version -->
         <mysql-driver.version>5.1.29</mysql-driver.version>
@@ -32,6 +32,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.spider</groupId>
+            <artifactId>Spider-service</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -210,21 +215,6 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.3.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.slob</groupId>
-            <artifactId>slob-base</artifactId>
-            <version>${slob.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.slob</groupId>
-            <artifactId>slob-dao</artifactId>
-            <version>${slob.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.slob</groupId>
-            <artifactId>slob-service</artifactId>
-            <version>${slob.version}</version>
         </dependency>
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>

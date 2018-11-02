@@ -1,24 +1,14 @@
 package com.snm.processer;
 
-import com.alibaba.fastjson.JSONObject;
 import com.snm.component.ProxyComponent;
-import com.snm.component.ShounimeiComponent;
 import com.snm.dao.DoubanDao;
-import com.snm.dao.SnmDao;
-import com.snm.dao.SnmFileDao;
-import com.snm.dao.SnmTypeDao;
 import com.snm.downloader.FailRetryDownloader;
 import com.snm.entity.Douban;
 import com.snm.entity.Snm;
 import com.snm.entity.SnmFile;
 import com.snm.model.AbstractHttpClient;
 import com.snm.utils.StringUtils;
-import com.snm.vo.TypeSubType;
 import com.spider.common.constant.SpiderConstants;
-import com.spider.common.exception.SpiderException;
-import com.spider.common.utils.SpiderUtils;
-import org.apache.http.client.CookieStore;
-import org.apache.http.cookie.Cookie;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
@@ -28,13 +18,10 @@ import org.springframework.stereotype.Service;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
-import us.codecraft.webmagic.downloader.HttpClientDownloader;
 import us.codecraft.webmagic.processor.PageProcessor;
 
 import javax.annotation.Resource;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 

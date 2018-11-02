@@ -1,7 +1,6 @@
 package com.snm.dao;
 
 import com.slob.dao.criteria.Condition;
-import com.slob.dao.criteria.Criteria;
 import com.snm.entity.Snm;
 import com.snm.entity.SnmSubtype;
 import com.snm.entity.SnmType;

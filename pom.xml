@@ -14,6 +14,7 @@
         <module>Spider-youku</module>
         <module>Spider-snm</module>
         <module>Spider-proxy</module>
+        <module>Spider-service</module>
     </modules>
 
     <dependencies>

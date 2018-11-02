@@ -2,7 +2,6 @@ package com.snm.dao;
 
 import com.snm.BaseJunit4Test;
 import com.snm.entity.SnmFile;
-import junit.framework.TestCase;
 import org.junit.Test;
 
 import javax.annotation.Resource;

@@ -1,7 +1,5 @@
 package com.snm.processer;
 
-import ch.qos.logback.classic.LoggerContext;
-import ch.qos.logback.core.util.StatusPrinter;
 import com.alibaba.fastjson.JSONObject;
 import com.snm.component.ProxyComponent;
 import com.snm.component.ShounimeiComponent;
@@ -25,11 +23,9 @@ import org.springframework.stereotype.Service;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
-import us.codecraft.webmagic.downloader.HttpClientDownloader;
 import us.codecraft.webmagic.processor.PageProcessor;
 
 import javax.annotation.Resource;
-import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;

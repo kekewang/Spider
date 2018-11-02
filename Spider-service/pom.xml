@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.spider</groupId>
+        <artifactId>Spider</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <description>爬虫数据服务</description>
+    <artifactId>Spider-service</artifactId>
+
+    <properties>
+        <slob.version>1.0-SNAPSHOT</slob.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.slob</groupId>
+            <artifactId>slob-base</artifactId>
+            <version>${slob.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.slob</groupId>
+            <artifactId>slob-dao</artifactId>
+            <version>${slob.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.slob</groupId>
+            <artifactId>slob-service</artifactId>
+            <version>${slob.version}</version>
+        </dependency>
+    </dependencies>
+
+
+</project>
