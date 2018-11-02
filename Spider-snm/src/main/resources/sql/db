@@ -47,3 +47,25 @@ CREATE TABLE `spider`.`failed_record` (
   PRIMARY KEY (`id`))
 COMMENT = '爬虫失败记录表';
 
+CREATE TABLE `spider`.`douban` (
+  `subject` INT NOT NULL COMMENT 'subject',
+  `title` VARCHAR(255) NULL COMMENT '标题',
+  `year` VARCHAR(10) NULL COMMENT '年份',
+  `mainpic` VARCHAR(255) DEFAULT NULL COMMENT '海报',
+  `director` VARCHAR(255) DEFAULT NULL COMMENT '导演',
+  `scenarist` VARCHAR(255) DEFAULT NULL COMMENT '编剧',
+  `actor` VARCHAR(255) DEFAULT NULL COMMENT '演员',
+  `category` VARCHAR(255) DEFAULT NULL COMMENT '类别',
+  `website` VARCHAR(255) DEFAULT NULL COMMENT '网站',
+  `country` VARCHAR(255) DEFAULT NULL COMMENT '国家',
+  `language` VARCHAR(255) DEFAULT NULL COMMENT '语言',
+  `release_time` VARCHAR(255) DEFAULT NULL COMMENT '上映时间',
+  `time` VARCHAR(255) DEFAULT NULL COMMENT '时长',
+  `name1` VARCHAR(255) DEFAULT NULL COMMENT '又命名',
+  `imdburl` VARCHAR(255) DEFAULT NULL COMMENT 'imdb地址',
+  `score` VARCHAR(255) DEFAULT NULL COMMENT '评分',
+  `summary` TEXT DEFAULT NULL COMMENT '内容简介',
+  `content` TEXT DEFAULT NULL COMMENT '评论',
+  `celebrity` VARCHAR(255) DEFAULT NULL COMMENT '演员链接',
+  PRIMARY KEY (`subject`))
+COMMENT = '豆瓣数据';

@@ -3,10 +3,12 @@ package com.snm.processer;
 import com.alibaba.fastjson.JSONObject;
 import com.snm.component.ProxyComponent;
 import com.snm.component.ShounimeiComponent;
+import com.snm.dao.DoubanDao;
 import com.snm.dao.SnmDao;
 import com.snm.dao.SnmFileDao;
 import com.snm.dao.SnmTypeDao;
 import com.snm.downloader.FailRetryDownloader;
+import com.snm.entity.Douban;
 import com.snm.entity.Snm;
 import com.snm.entity.SnmFile;
 import com.snm.model.AbstractHttpClient;
@@ -50,6 +52,9 @@ public class DoubanProcesser extends AbstractHttpClient implements PageProcessor
     @Autowired
     FailRetryDownloader failRetryDownloader;
 
+    @Resource
+    DoubanDao doubanDao;
+
     public void process(Page page) {
         logger.info("Parsing page: {}", page.getUrl());
         try {
@@ -62,10 +67,15 @@ public class DoubanProcesser extends AbstractHttpClient implements PageProcessor
             String id = page.getUrl().regex("https://movie.douban.com/subject/([0-9]*)/.*").toString();
             String title = page.getHtml().xpath("//div[@id='content']/h1/span/text()").toString();
             if (!StringUtils.isEmpty(id) && !StringUtils.isEmpty(title)) {
+                Douban douban = new Douban();
                 page.putField(SpiderConstants.DOUBAN_SUBJECT, id);
+                douban.setSubject(Integer.valueOf(id));
                 page.putField(SpiderConstants.DOUBAN_TITLE, page.getHtml().xpath("//div[@id='content']/h1/span/text()").toString());
+                douban.setTitle(page.getResultItems().get(SpiderConstants.DOUBAN_TITLE));
                 page.putField(SpiderConstants.DOUBAN_YEAR, page.getHtml().xpath("//div[@id='content']/h1/span[@class='year']/text()").toString());
+                douban.setYear(page.getResultItems().get(SpiderConstants.DOUBAN_YEAR));
                 page.putField(SpiderConstants.DOUBAN_MAINPIC, page.getHtml().xpath("//div[@id='mainpic']/a/img/@src").toString());
+                douban.setMainpic(page.getResultItems().get(SpiderConstants.DOUBAN_MAINPIC));
 
                 List categorys = new ArrayList();
                 List releaseDate = new ArrayList();
@@ -74,31 +84,37 @@ public class DoubanProcesser extends AbstractHttpClient implements PageProcessor
                     Document doc = Jsoup.parse(attr);
                     if (attr.contains("导演")){
                         page.putField(SpiderConstants.DOUBAN_DIRECTOR, doc.select("a").text());
+                        douban.setDirector(page.getResultItems().get(SpiderConstants.DOUBAN_DIRECTOR));
                     }
                     if (attr.contains("编剧")){
                         page.putField(SpiderConstants.DOUBAN_SCENARIST, doc.select("a").text());
+                        douban.setScenarist(page.getResultItems().get(SpiderConstants.DOUBAN_SCENARIST));
                     }
                     if (attr.contains("主演")){
                         page.putField(SpiderConstants.DOUBAN_ACTOR, doc.select("a").text());
+                        douban.setActor(page.getResultItems().get(SpiderConstants.DOUBAN_ACTOR));
                     }
                     if (doc.select("span[property=v:genre]").size()>0){
                         categorys.add(doc.select("span[property=v:genre]").text());
                     }
                     if (doc.select("span[property=v:runtime]").size()>0){
                         page.putField(SpiderConstants.DOUBAN_TIME, doc.select("span[property=v:runtime]").text());
+                        douban.setTime(page.getResultItems().get(SpiderConstants.DOUBAN_TIME));
                     }
                     if (doc.select("span[property=v:initialReleaseDate]").size()>0){
                         releaseDate.add(doc.select("span[property=v:initialReleaseDate]").text());
                     }
                 }
                 page.putField(SpiderConstants.DOUBAN_CATEGORY, categorys);
+                douban.setCategory(categorys.toString());
                 page.putField(SpiderConstants.DOUBAN_RELEASETIME, releaseDate);
+                douban.setReleaseTime(releaseDate.toString());
                 page.putField(SpiderConstants.DOUBAN_SCORE, page.getHtml().xpath("//strong[@class='ll rating_num']/text()").toString());
+                douban.setScore(page.getResultItems().get(SpiderConstants.DOUBAN_SCORE));
                 page.putField(SpiderConstants.DOUBAN_SUMMARY, page.getHtml().xpath("//span[@property='v:summary']/text()").toString());
+                douban.setSummary(page.getResultItems().get(SpiderConstants.DOUBAN_SUMMARY));
 
-            }
-            else{
-
+                doubanDao.save(douban);
             }
         } catch (Exception e) {
             logger.error("Parsing page failed, url={}, {}, {}"
@@ -114,9 +130,10 @@ public class DoubanProcesser extends AbstractHttpClient implements PageProcessor
 
     public void run() {
         logger.info("Starting spider...");
-        FailRetryDownloader downloader = new FailRetryDownloader(this, proxyComponent.getSimpleProxyProvider());
+        failRetryDownloader.setProxyProvider(proxyComponent.getSimpleProxyProvider());
+        failRetryDownloader.setPageProcessor(this);
         Spider.create(this)
-                .setDownloader(downloader)
+                .setDownloader(failRetryDownloader)
                 .addUrl("https://movie.douban.com/")
                 .thread(50)
                 .run();

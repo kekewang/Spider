@@ -17,7 +17,7 @@
 
     <packageName>com.snm.domain</packageName>
     <tables>
-        <table name="failed_record" />
+        <table name="douban" />
     </tables>
 </config>
 				
