@@ -1,7 +1,7 @@
 package com.snm.dao;
 
 import com.snm.BaseJunit4Test;
-import com.snm.entity.SnmFile;
+import com.snm.domain.SnmFile;
 import org.junit.Test;
 
 import javax.annotation.Resource;

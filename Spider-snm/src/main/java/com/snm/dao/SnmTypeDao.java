@@ -1,9 +1,8 @@
 package com.snm.dao;
 
 import com.slob.dao.criteria.Condition;
-import com.snm.entity.Snm;
-import com.snm.entity.SnmSubtype;
-import com.snm.entity.SnmType;
+import com.snm.domain.SnmSubtype;
+import com.snm.domain.SnmType;
 import com.snm.utils.StringUtils;
 import com.snm.vo.TypeSubType;
 import org.junit.Assert;

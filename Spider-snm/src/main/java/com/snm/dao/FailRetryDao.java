@@ -1,7 +1,6 @@
 package com.snm.dao;
 
-import com.snm.entity.FailedRecord;
-import com.snm.entity.Snm;
+import com.snm.domain.FailedRecord;
 import org.springframework.stereotype.Repository;
 
 @Repository

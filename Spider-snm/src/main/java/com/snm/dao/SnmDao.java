@@ -1,6 +1,6 @@
 package com.snm.dao;
 
-import com.snm.entity.Snm;
+import com.snm.domain.Snm;
 import org.springframework.stereotype.Repository;
 
 @Repository

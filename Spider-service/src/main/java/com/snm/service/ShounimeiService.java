@@ -1,4 +1,4 @@
-package com.wsm.api.service;
+package com.snm.service;
 
 public interface ShounimeiService {
 

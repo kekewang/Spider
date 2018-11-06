@@ -1,8 +1,7 @@
-package com.snm.entity;
+package com.snm.domain;
 
 import com.slob.dao.annotation.ID;
 import com.slob.dao.annotation.Table;
-import com.snm.entity.BaseEntity;
 import com.slob.dao.annotation.Column;
 import java.lang.String;
 import com.slob.core.Data;

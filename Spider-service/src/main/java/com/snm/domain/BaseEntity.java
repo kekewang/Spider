@@ -1,4 +1,4 @@
-package com.snm.entity;
+package com.snm.domain;
 
 import java.beans.PropertyDescriptor;
 import java.io.IOException;

@@ -1,6 +1,6 @@
 package com.snm.vo;
 
-import com.snm.entity.BaseEntity;
+import com.snm.domain.BaseEntity;
 
 public class TypeSubType extends BaseEntity {
 

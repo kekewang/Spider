@@ -1,7 +1,6 @@
 package com.snm.dao;
 
-import com.snm.entity.Douban;
-import com.snm.entity.Snm;
+import com.snm.domain.Douban;
 import org.springframework.stereotype.Repository;
 
 @Repository

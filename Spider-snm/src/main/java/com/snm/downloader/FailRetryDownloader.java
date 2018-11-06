@@ -1,7 +1,7 @@
 package com.snm.downloader;
 
 import com.snm.dao.FailRetryDao;
-import com.snm.entity.FailedRecord;
+import com.snm.domain.FailedRecord;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Request;
 import us.codecraft.webmagic.downloader.HttpClientDownloader;

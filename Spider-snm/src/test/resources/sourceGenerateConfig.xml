@@ -9,7 +9,7 @@
     <!-- 1个tab 与eclipse一致 , trim=false 时tab或空不会被trim掉 -->
     <indent trim="false"></indent>
     <!-- 	<superType>com.slob.core.Entity</superType> -->
-    <superType>com.snm.entity.BaseEntity</superType>
+    <superType>com.snm.domain.BaseEntity</superType>
     <plugins>
         <!-- 		<plugin>com.slob.dao.DataObjectGeneratePluginImpl</plugin> -->
     </plugins>

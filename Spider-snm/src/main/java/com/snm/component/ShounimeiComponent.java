@@ -1,6 +1,6 @@
 package com.snm.component;
 
-import com.snm.entity.SnmFile;
+import com.snm.domain.SnmFile;
 import com.snm.model.AbstractHttpClient;
 import com.spider.common.utils.SpiderUtils;
 import org.apache.http.Header;
