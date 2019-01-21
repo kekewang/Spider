@@ -14,4 +14,10 @@ public class YoukuProcesserTest extends BaseSpringTest {
     public void testProcess() throws Exception {
         youkuProcesser.run();
     }
+
+    @Test
+    public void start()
+    {
+        while (true);
+    }
 }
