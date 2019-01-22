@@ -17,6 +17,7 @@ import us.codecraft.webmagic.proxy.Proxy;
 import us.codecraft.webmagic.proxy.ProxyProvider;
 import us.codecraft.webmagic.proxy.SimpleProxyProvider;
 
+import javax.annotation.Resource;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -37,7 +38,7 @@ public class YoukuProcesser implements PageProcessor {
 
     public static int pageCount = 0;
 
-    @Autowired
+    @Resource
     private YoukuVideoDAO youkuVideoDAO;
 
     @Autowired

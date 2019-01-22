@@ -20,7 +20,7 @@ public class SpiderService implements InitializingBean, Refreshable {
 
     private static final int DELAY = 0;
 
-    private int refreshInterval = 300;
+    private int refreshInterval = 10;
 
     @Autowired
     private YoukuProcesser youkuProcesser;

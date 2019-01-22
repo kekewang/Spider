@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spider.dao.GithubProjectDAO">
+
+    <resultMap id="BaseResultMap" type="com.spider.entity.GuthubProjectEntity">
+        <id column="index" property="index" jdbcType="VARCHAR" />
+        <result column="url" property="url" jdbcType="VARCHAR" />
+        <result column="author" property="author" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="about" property="about" jdbcType="VARCHAR" />
+        <result column="readme" property="readme" jdbcType="VARCHAR" />
+        <result column="fork" property="fork" jdbcType="VARCHAR" />
+        <result column="watch" property="watch" jdbcType="VARCHAR" />
+        <result column="star" property="star" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <insert id="insert" parameterType="com.spider.entity.GuthubProjectEntity">
+        INSERT INTO `github_project`
+        (`index`, url, author, `name`, about, readme, fork, watch, star)
+        VALUES
+        (#{index}, #{url}, #{author}, #{name}, #{about}, #{readme}, #{fork}, #{watch}, #{star})
+    </insert>
+
+    <select id="selectByKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT
+          *
+        FROM
+          `github_project`
+        WHERE
+          `index` = #{index};
+    </select>
+    <update id="updateByKey" parameterType="com.spider.entity.GuthubProjectEntity">
+        UPDATE
+          `github_project`
+        SET
+          url = #{url},
+          author = #{author},
+          `name` = #{name},
+          about = #{about},
+          readme = #{readme},
+          fork = #{fork},
+          watch = #{watch},
+          star = #{star}
+        WHERE
+          `index` = #{index};
+    </update>
+</mapper>

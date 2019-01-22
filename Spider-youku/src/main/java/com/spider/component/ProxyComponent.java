@@ -17,9 +17,10 @@ public class ProxyComponent {
 
     public List<Proxy> proxyList = new ArrayList();
 
-    public BufferedReader proxyIpReader = new BufferedReader(new InputStreamReader(YoukuProcesser.class.getResourceAsStream("/config/proxyip.txt")));
-
     public ProxyProvider getSimpleProxyProvider() {
+
+        BufferedReader proxyIpReader = new BufferedReader(new InputStreamReader(YoukuProcesser.class.getResourceAsStream("/config/proxyip.txt")));
+
         String[] ip = new String[4];
         try {
             String socket = null;

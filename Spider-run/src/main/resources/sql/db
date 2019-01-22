@@ -1,0 +1,51 @@
+CREATE DATABASE `spider`;
+
+CREATE TABLE `spider`.`youku_video` (
+  `vid` varchar(50) NOT NULL,
+  `title` varchar(50) DEFAULT NULL,
+  `url` text DEFAULT NULL,
+  `category` varchar(50) DEFAULT NULL,
+  `categoryUrl` text DEFAULT NULL,
+  `create_date` date DEFAULT NULL,
+  `update_date` date DEFAULT NULL,
+  PRIMARY KEY (`vid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='youku video storage';
+
+CREATE TABLE `spider`.`github_project` (
+  `index` varchar(255) NOT NULL,
+  `keyword` varchar(20) DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `author` varchar(50) DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `about` varchar(255) DEFAULT NULL,
+  `readme` text,
+  `fork` varchar(20) DEFAULT NULL,
+  `watch` varchar(20) DEFAULT NULL,
+  `star` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`index`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='github project page';
+
+CREATE TABLE `spider`.`zhihu_article` (
+  `id` varchar(50) NOT NULL,
+  `title` varchar(20) DEFAULT NULL,
+  `author` varchar(50) DEFAULT NULL,
+  `content` text DEFAULT NULL,
+  `fork` varchar(50) DEFAULT NULL,
+  `watch` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='zhihu article page';
+
+CREATE TABLE `spider`.`zhihu_answer` (
+  `id` varchar(50) NOT NULL,
+  `aid` varchar(50) NOT NULL,
+  `title` varchar(20) DEFAULT NULL,
+  `author` varchar(50) DEFAULT NULL,
+  `type` varchar(20) DEFAULT NULL,
+  `voters` varchar(20) DEFAULT NULL,
+  `content` text DEFAULT NULL,
+  `date` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='zhihu answer page';
+
+
+

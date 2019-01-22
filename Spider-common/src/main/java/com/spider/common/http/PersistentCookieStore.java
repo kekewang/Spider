@@ -1,13 +1,11 @@
-package com.spider.component;
+package com.spider.common.http;
 
 
 import org.apache.http.client.CookieStore;
 import org.apache.http.cookie.Cookie;
 import org.springframework.stereotype.Component;
 
-import java.net.HttpCookie;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 public class PersistentCookieStore implements CookieStore {
@@ -26,6 +24,9 @@ public class PersistentCookieStore implements CookieStore {
             else {
                 cookies.remove(cookie.getName());
             }
+        }
+        else {
+            cookies.put(cookie.getName(), cookie);
         }
     }
 

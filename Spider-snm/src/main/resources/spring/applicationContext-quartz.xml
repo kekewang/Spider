@@ -17,7 +17,7 @@
         http://www.springframework.org/schema/cache
         http://www.springframework.org/schema/cache/spring-cache.xsd">
 	<!--&lt;!&ndash; 定时器工作调度的bean &ndash;&gt;-->
-	<!--<bean id="refreshAppInfoJob" class="com.wsm.job.RefreshAppInfoJob" />-->
+	<!--<bean id="refreshAppInfoJob" class="com.spider.job.RefreshAppInfoJob" />-->
 
 	<!--&lt;!&ndash; job的配置开始 &ndash;&gt;-->
 	<!--<bean id="refreshAppInfoJobDetail"-->
