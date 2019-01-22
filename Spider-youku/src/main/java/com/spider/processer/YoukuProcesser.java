@@ -2,7 +2,8 @@ package com.spider.processer;
 
 import com.spider.common.constant.SpiderConstants;
 import com.spider.component.ProxyComponent;
-import com.spider.dao.YoukuVideoDAO;
+import com.spider.dao.YoukuVideoDao;
+import com.spider.dao.YoukuVideoDao;
 import com.spider.entity.YoukuVideoEntity;
 import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class YoukuProcesser implements PageProcessor {
     public static int pageCount = 0;
 
     @Resource
-    private YoukuVideoDAO youkuVideoDAO;
+    private YoukuVideoDao youkuVideoDao;
 
     @Autowired
     private ProxyComponent proxyComponent;
@@ -80,12 +81,12 @@ public class YoukuProcesser implements PageProcessor {
         youkuVideoEntity.setCreateTime(df.format(new Date()));
         youkuVideoEntity.setUpdateTime(df.format(new Date()));
 
-        List<YoukuVideoEntity> list = youkuVideoDAO.selectByKey(youkuVideoEntity.getVid());
+        List<YoukuVideoEntity> list = youkuVideoDao.selectByKey(youkuVideoEntity.getVid());
         if (list.isEmpty()) {
-            youkuVideoDAO.insert(youkuVideoEntity);
+            youkuVideoDao.insert(youkuVideoEntity);
         }
         else {
-            youkuVideoDAO.updateByKey(youkuVideoEntity);
+            youkuVideoDao.updateByKey(youkuVideoEntity);
         }
     }
 

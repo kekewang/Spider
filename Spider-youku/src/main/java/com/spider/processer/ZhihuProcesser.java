@@ -3,8 +3,8 @@ package com.spider.processer;
 import com.spider.common.constant.SpiderConstants;
 import com.spider.component.ProxyComponent;
 import com.spider.component.ZhihuLoginComponent;
-import com.spider.dao.ZhihuAnswerDAO;
-import com.spider.dao.ZhihuArticleDAO;
+import com.spider.dao.ZhihuAnswerDao;
+import com.spider.dao.ZhihuArticleDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import us.codecraft.webmagic.Page;
@@ -35,10 +35,10 @@ public class ZhihuProcesser implements PageProcessor {
     private ProxyComponent proxyComponent;
 
     @Autowired
-    ZhihuAnswerDAO zhihuAnswerDAO;
+    ZhihuAnswerDao zhihuAnswerDao;
 
     @Autowired
-    ZhihuArticleDAO zhihuArticleDAO;
+    ZhihuArticleDao zhihuArticleDao;
 
     @Autowired
     ZhihuLoginComponent zhihuLoginComponent;

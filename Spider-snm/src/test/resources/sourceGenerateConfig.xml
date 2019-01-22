@@ -17,7 +17,7 @@
 
     <packageName>com.snm.domain</packageName>
     <tables>
-        <table name="douban" />
+        <table name="proxy" />
     </tables>
 </config>
 				

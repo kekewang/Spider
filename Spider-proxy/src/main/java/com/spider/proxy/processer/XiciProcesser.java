@@ -1,23 +1,28 @@
 package com.spider.proxy.processer;
 
+import com.spider.proxy.domain.Proxy;
 import com.spider.proxy.enums.ProxyType;
-import com.spider.proxy.utils.FileUtil;
+import com.spider.proxy.service.ProxyService;
 import com.spider.proxy.utils.ProxyValidater;
 import com.spider.proxy.vo.ProxyVo;
+import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.selector.Selectable;
-import us.codecraft.webmagic.thread.CountableThreadPool;
 
-import java.io.*;
-import java.util.*;
+import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
 /**
  * Created by wangke on 2017/9/22.
  */
+@Component
 public class XiciProcesser implements PageProcessor {
 
     private Site site = Site.me().setRetryTimes(5).setSleepTime(1000).setTimeOut(10000);
@@ -31,6 +36,9 @@ public class XiciProcesser implements PageProcessor {
      * Page No.
      */
     private static int pageNo;
+
+    @Resource
+    private ProxyService proxyService;
 
     private Set<String> proxySet = new HashSet<String>();
 
@@ -81,7 +89,12 @@ public class XiciProcesser implements PageProcessor {
                             String proxy = ip + ":" + port;
                             if (isValidProxy && !proxySet.contains(proxy)){
                                 proxySet.add(proxy);
-                                FileUtil.saveProxy("/proxy", proxy);
+                                //FileUtil.saveProxy("/proxy", proxy);
+
+                                Proxy proxy1 = new Proxy();
+                                proxy1.setIp(ip);
+                                proxy1.setPort(Integer.valueOf(port));
+                                proxyService.saveProxy(proxy1);
                                 System.out.println("Successed to add new proxy," + proxy);
                             }
                             else {

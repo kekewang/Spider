@@ -2,7 +2,8 @@ package com.spider.processer;
 
 import com.spider.common.constant.SpiderConstants;
 import com.spider.component.ProxyComponent;
-import com.spider.dao.GithubProjectDAO;
+import com.spider.dao.GithubProjectDao;
+import com.spider.dao.GithubProjectDao;
 import com.spider.entity.GuthubProjectEntity;
 import com.spider.entity.YoukuVideoEntity;
 import com.spider.spider.GithubSpider;
@@ -25,7 +26,7 @@ public class GithubProcesser implements PageProcessor {
     private Site site = Site.me().setRetryTimes(10).setTimeOut(1000);
 
     @Autowired
-    GithubProjectDAO githubProjectDAO;
+    GithubProjectDao githubProjectDao;
 
     @Autowired
     private ProxyComponent proxyComponent;
@@ -67,12 +68,12 @@ public class GithubProcesser implements PageProcessor {
             guthubProjectEntity.setWatch(page.getResultItems().get(SpiderConstants.GITHUB_WATCH).toString());
 
             List<GuthubProjectEntity> list
-                    = githubProjectDAO.selectByKey(guthubProjectEntity.getIndex());
+                    = githubProjectDao.selectByKey(guthubProjectEntity.getIndex());
             if (list.isEmpty()) {
-                githubProjectDAO.insert(guthubProjectEntity);
+                githubProjectDao.insert(guthubProjectEntity);
             }
             else {
-                githubProjectDAO.updateByKey(guthubProjectEntity);
+                githubProjectDao.updateByKey(guthubProjectEntity);
             }
         }
         catch (Exception e){

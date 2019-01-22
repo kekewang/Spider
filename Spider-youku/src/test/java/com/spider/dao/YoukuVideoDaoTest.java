@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-public class YoukuVideoDAOTest extends BaseSpringTest {
+public class YoukuVideoDaoTest extends BaseSpringTest {
 
     @Autowired
-    YoukuVideoDAO youkuVideoDAO;
+    YoukuVideoDao youkuVideoDao;
 
     @Test
     public void testInsert(){
@@ -22,12 +22,12 @@ public class YoukuVideoDAOTest extends BaseSpringTest {
         entity.setUrl("http://");
         entity.setCreateTime("2017-11-22 22:20:14");
         entity.setUpdateTime("2017-11-22 22:20:14");
-        youkuVideoDAO.insert(entity);
+        youkuVideoDao.insert(entity);
     }
 
     @Test
     public void testSelect(){
-        List<YoukuVideoEntity> list = youkuVideoDAO.selectByKey("XMjc3MTAwNDc0MA");
+        List<YoukuVideoEntity> list = youkuVideoDao.selectByKey("XMjc3MTAwNDc0MA");
 
         System.out.println(list);
     }
@@ -41,6 +41,6 @@ public class YoukuVideoDAOTest extends BaseSpringTest {
         entity.setUrl("http://");
         entity.setCreateTime("2017-11-22 22:20:14");
         entity.setUpdateTime("2017-11-22 22:20:14");
-        youkuVideoDAO.updateByKey(entity);
+        youkuVideoDao.updateByKey(entity);
     }
 }
